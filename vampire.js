@@ -24,10 +24,12 @@ class Vampire {
     let currentVampire = this;
     let count = 0;
 
+    // If not root increase counter and iterate up the tree
     while (currentVampire.creator) {
       count++;
       currentVampire = currentVampire.creator;
     }
+    // Return the counter
     return count;
   }
 
@@ -38,6 +40,7 @@ class Vampire {
     let countOther = 0;
     let countThis = 0;
 
+    // Return true this vampire is closer to the root
     while (otherVampire.creator && thisVampire.creator) {
       countOther++;
       countThis++;
@@ -45,6 +48,7 @@ class Vampire {
       thisVampire = thisVampire.creator;
     }
 
+    // Return true this vampire is closer to the root
     if (otherVampire.creator) {
       countOther++;
     }
@@ -52,6 +56,7 @@ class Vampire {
       countThis++;
     }
 
+    // Return true this vampire is closer to the root
     if (countThis < countOther) {
       return true;
     } else {
