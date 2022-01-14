@@ -21,7 +21,14 @@ class Vampire {
 
   // Returns the number of vampires away from the original vampire this vampire is
   get numberOfVampiresFromOriginal() {
+    let currentVampire = this;
+    let count = 0;
 
+    while (currentVampire.creator) {
+      count++;
+      currentVampire = currentVampire.creator;
+    }
+    return count;
   }
 
   // Returns true if this vampire is more senior than the other vampire. (Who is closer to the original vampire)
@@ -40,6 +47,18 @@ class Vampire {
 
   }
 }
+
+const v1 = new Vampire('v1', 2010);
+const v2 = new Vampire('v2', 2012);
+const v3 = new Vampire('v3', 2013);
+const v4 = new Vampire('v4', 2014);
+const v5 = new Vampire('v5', 2015);
+
+v1.addOffspring(v2);
+v2.addOffspring(v3);
+v3.addOffspring(v4);
+v1.addOffspring(v5);
+console.log(v5.numberOfVampiresFromOriginal);
 
 module.exports = Vampire;
 
