@@ -33,7 +33,30 @@ class Vampire {
 
   // Returns true if this vampire is more senior than the other vampire. (Who is closer to the original vampire)
   isMoreSeniorThan(vampire) {
+    let otherVampire = vampire;
+    let thisVampire = this;
+    let countOther = 0;
+    let countThis = 0;
 
+    while (otherVampire.creator && thisVampire.creator) {
+      countOther++;
+      countThis++;
+      otherVampire = otherVampire.creator;
+      thisVampire = thisVampire.creator;
+    }
+
+    if (otherVampire.creator) {
+      countOther++;
+    }
+    if (thisVampire.creator) {
+      countThis++;
+    }
+
+    if (countThis < countOther) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /** Stretch **/
@@ -58,7 +81,7 @@ v1.addOffspring(v2);
 v2.addOffspring(v3);
 v3.addOffspring(v4);
 v1.addOffspring(v5);
-console.log(v5.numberOfVampiresFromOriginal);
+console.log(v5.isMoreSeniorThan(v4));
 
 module.exports = Vampire;
 
